@@ -1,5 +1,5 @@
 # CPU Emulator
-<hr></hr>
+<hr>
 
 ## The Bootloader
 - bootable image consists of a 256 byte bootloader and a program
@@ -52,7 +52,7 @@ eb dd 00 00 00 00 00 00 00 00 00 00 00 00 00 00\
 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\
 *\
 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 55 aa
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 55 aa\
 
 
 - the 3rd and 4th byte of the loop indicate how many times the program in the loop space is executed
@@ -62,8 +62,7 @@ eb d0 ff ff 00 00 00 00 00 00 00 00 00 00 00 00\
 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\
 *\
 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\
-00 00 00 00 00 00 00 00 00 00 00 00 00 00 55 aa
-
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 55 aa\
 
 ## RAM
 
@@ -147,30 +146,34 @@ eb d0 ff ff 00 00 00 00 00 00 00 00 00 00 00 00\
 
 - the GPU has a line buffer with the size of bits according to the amount of pixel on the x axis
 - the GPU's frame buffer is sized according to this formula (x_pixels*y_pixels/pixel_size)
-- the gpu also includes a general purpose ram with a size of 32 bits
+- the GPU also includes a general purpose ram with a size of 32 bits
+- the GPU doesn't do any calculations
+  - instead the CPU does all the work
+  - the GPU is only used for drawing pixels and text
 
 # Instruction set
-<hr></hr>
+<hr>
 
 ## cpu instructions
   
-  | HEX code | Opcode | Description                               | Usage                                                |
-  |----------|--------|-------------------------------------------|------------------------------------------------------|
-  | 0x1      | /      | Reserved for GPU                          | /                                                    |
-  | 0x2      | INC    | adds 1 to data at address or value        | < data  /  address >                                 |
-  | 0x3      | DEC    | decreases data at address or value by 1   | < data  /  address >                                 |
-  | 0x4      | ADD    | add                                       | < int or addr > to < int or addr > < output addr >   |
-  | 0x5      | SUB    | subtract                                  | < int or addr > from < int or addr > < output addr > |
-  | 0x6      | AND    | bit wise and operation                    | < int or addr > < int or addr > < output addr >      |
-  | 0x7      | OR     | bit wise or operation                     | < int or addr > < int or addr > < output addr >      |
-  | 0x8      | XOR    | bit wise xor operation                    | < int or addr > < int or addr > < output addr >      |
-  | 0x9      | CMP    | compares 2 values and sets flag           | < int or addr > < int or addr >                      |
-  | 0xA      | PUSH   | overwrites value at memory address        | < int or addr > < dst >                              |
-  | 0xB      | POP    | clears data at memory address             | < dst >                                              |
-  | 0xC      | MOV    | switches values at src and dst            | < src > < dst >                                      |
-  | 0xD      | IN     | waits for input, input gets saved in var  | < var >                                              |
-  | 0xE      | NOP    | does absolutely nothing                   | /                                                    |
-  | 0xf      | BR     | exits / stops the program and sets flag   | < exit code / description >                          |
+  | HEX code | Opcode | Description                              | Usage                                                         |
+  |----------|--------|------------------------------------------|---------------------------------------------------------------|
+  | 0x0      | /      | does absolutely nothing                  | /                                                             |
+  | 0x1      | /      | Reserved for GPU                         | /                                                             |
+  | 0x2      | INC    | adds 1 to data at address or value       | < data  /  address >                                          |
+  | 0x3      | DEC    | decreases data at address or value by 1  | < data  /  address >                                          |
+  | 0x4      | ADD    | add                                      | < int or addr > to < int or addr > <br/> < output addr >      |
+  | 0x5      | SUB    | subtract                                 | < int or addr > from < int or addr > <br/> < output addr >    |
+  | 0x6      | AND    | bit wise and operation                   | < int or addr > < int or addr > < output addr >               |
+  | 0x7      | OR     | bit wise or operation                    | < int or addr > < int or addr > < output addr >               |
+  | 0x8      | XOR    | bit wise xor operation                   | < int or addr > < int or addr > <br/>< output addr >          |
+  | 0x9      | CMP    | compares 2 values and sets flag          | < int or addr > < int or addr >                               |
+  | 0xA      | PUSH   | overwrites value at memory address       | < int or addr > < dst >                                       |
+  | 0xB      | POP    | clears data at memory address            | < dst >                                                       |
+  | 0xC      | MOV    | switches values at src and dst           | < src > < dst >                                               |
+  | 0xD      | IN     | waits for input, input gets saved in var | < var >                                                       |
+  | 0xE      | BS     | bit shift                                | < opperant  <<< for left <br/> >>> for right > < var / addr > |
+  | 0xf      | BR     | exits / stops the program and sets flag  | < exit code / description >                                   |
 
 
 
@@ -186,5 +189,4 @@ eb d0 ff ff 00 00 00 00 00 00 00 00 00 00 00 00\
   | 0x15     | GPUDMPLB | dumps the line buffer to the monitor  | < line index default is 0 >                              |
   | 0x16     | GPUDMPFB | dumps the frame buffer to the monitor | /                                                        |
   | 0x17     | GPUUPD   | refreshes the monitor                 | /                                                        |
-
 
