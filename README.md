@@ -64,6 +64,7 @@ eb d0 ff ff 00 00 00 00 00 00 00 00 00 00 00 00\
 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\
 00 00 00 00 00 00 00 00 00 00 00 00 00 00 55 aa
 
+
 ## RAM
 
 - the ram consists of a list with n words. words being bytes
