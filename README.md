@@ -1,7 +1,7 @@
 # CPU Emulator
 <hr>
 
-## The Bootloader
+## The Bootloader __!!SCRATCHED!!__
 - bootable image consists of a 256 byte bootloader and a program
 
 - bootloader begins with 2 bytes (eb ff) and ends with 2 bytes (55 aa)
@@ -67,7 +67,7 @@ eb d0 ff ff 00 00 00 00 00 00 00 00 00 00 00 00\
 ## RAM
 
 - the ram consists of a list with n words. words being bytes
-  - the default value if words is 65535 or a size of ~64kb
+  - the default value of words is 65535 or a size of ~64kb
     - max address is FFFF and min address is 0000 while 0000 is a function address and works\
       like a dump meaning 0000 will always be 00000000 
     - __all data send to 0000 will be lost!!__
@@ -80,7 +80,7 @@ eb d0 ff ff 00 00 00 00 00 00 00 00 00 00 00 00\
   - accessing a specific bit in RAM uses the hex address of the word and the bit offset in hex separated by a '__:__'
     - a:8
       - reads the 8th bit of the word at address a
-    -ff:2
+    - ff:2
       - reads the 2nd bit of the word at address ff
 
 
@@ -89,10 +89,11 @@ eb d0 ff ff 00 00 00 00 00 00 00 00 00 00 00 00\
   - e.g. [[0x41],[0x0],[0x14],[0xff],...]
   - e.g. [[1],[123],[255],[33],...]
 
-## Registers
+## Registers __!!SCRATCHED!!__
 
 - there are 4 registers:
-  - register a:
+
+  - register a: __!!SCRATCHED!!__
     - modification register
       - only has 16 words with each word having 9 bits
         - [x,0,0,0,0,0,0,0,0]
@@ -102,24 +103,24 @@ eb d0 ff ff 00 00 00 00 00 00 00 00 00 00 00 00\
       - used for modifying data e.g. adding, subtracting
       
 
-  - register b:
+  - register b: __!!SCRATCHED!!__
     - communication register
       - used for communication between ram, cpu and gpu
       - 64 words with 8 bits each
       
 
-  - register c:
+  - register c: __!!SCRATCHED!!__
     - logic register
     - used for logic operations: AND, OR, XOR and CMP (see flag register)
     - 4x 2 words with each having 8 bits
     
 
-  - register d:
+  - register d: __!!SCRATCHED!!__
     - multipurpose register
     - 32 words with each having 16 bits
   
 
-  - flag register
+  - flag register __!!SCRATCHED!!__
     - used for setting flags
     - 4 words with each having 2 bits
       - word 1
@@ -167,13 +168,13 @@ eb d0 ff ff 00 00 00 00 00 00 00 00 00 00 00 00\
   | 0x6      | AND    | bit wise and operation                   | < int or addr > < int or addr > < output addr >               |
   | 0x7      | OR     | bit wise or operation                    | < int or addr > < int or addr > < output addr >               |
   | 0x8      | XOR    | bit wise xor operation                   | < int or addr > < int or addr > <br/>< output addr >          |
-  | 0x9      | CMP    | compares 2 values and sets flag          | < int or addr > < int or addr >                               |
+  | 0x9      | MSG    | prints a text                            | < text or addr > < A for text (auto convert) R for raw data > |
   | 0xA      | PUSH   | overwrites value at memory address       | < int or addr > < dst >                                       |
   | 0xB      | POP    | clears data at memory address            | < dst >                                                       |
   | 0xC      | MOV    | switches values at src and dst           | < src > < dst >                                               |
   | 0xD      | IN     | waits for input, input gets saved in var | < var >                                                       |
   | 0xE      | BS     | bit shift                                | < opperant  <<< for left <br/> >>> for right > < var / addr > |
-  | 0xf      | BR     | exits / stops the program and sets flag  | < exit code / description >                                   |
+  | 0xf      | NOT    | bitwise not                              | < int or addr > < output addr >                               |
 
 
 
@@ -182,7 +183,7 @@ eb d0 ff ff 00 00 00 00 00 00 00 00 00 00 00 00\
   
   | HEX code | Opcode   | Description                           | Usage                                                    |
   |----------|----------|---------------------------------------|----------------------------------------------------------|
-  | 0x11     | GPUINIT  | initialises the gpu                   | /                                                        |
+  | 0x11     | GPUINIT  | initialises the gpu                   | SCRATCHED                                                |
   | 0x12     | GPUPRN   | prints text to display                | < str in "" / mem addr / data >                          |
   | 0x13     | GPUPIX   | draws a pixel on the monitor          | < position in () > < 0 for white and 1 for balck pixel > |
   | 0x14     | GPUCLS   | clears the monitor                    | /                                                        |
