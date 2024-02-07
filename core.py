@@ -43,18 +43,6 @@ def execute(key, op1, op2, op3):
         logic.BS(ram=ram, *xopperants)
     elif key == 'NOT':
         logic.NOT(ram=ram, *xopperants)
-    elif key == 'GPUPRN':
-        pass
-    elif key == 'GPUPIX':
-        pass
-    elif key == 'GPUCLS':
-        pass
-    elif key == 'GPUDMPLB':
-        pass
-    elif key == 'GPUDMPFB':
-        pass
-    elif key == 'GPUUPD':
-        pass
     elif key == 'DMPADDR':
         ram_var_man.DMPADDR(ram=ram, *xopperants)
     elif key == 'DMPMEM':
