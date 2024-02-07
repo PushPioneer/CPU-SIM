@@ -61,10 +61,10 @@ def execute(key, op1, op2, op3):
         ram_var_man.DMP(ram=ram)
     elif op1 in ['DB','DW','DD','DQ','DT']:
         if op2 == '':
-            ram_var_man.MALLOC(size=op1,name=key,ram=ram,)
+            ram_var_man.MALLOC(size=op1,name=key,ram=ram)
         else:
             ram_var_man.VARMAN(ram=ram,*xopperants)
     elif op1.isnumeric():
-        ram_var_man.MALLOC(ram=ram, *xopperants)
+        ram_var_man.MALLOC(ram=ram, name=key,size=int(op1))
     else:
         pass
