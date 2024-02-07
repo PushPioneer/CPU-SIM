@@ -1,0 +1,8 @@
+PUSH 0xA 0
+DMPADDR 0
+test_var DD
+IN test_var "name: "
+MSG T "Hallo: "
+MSG V test_var
+MSG T "TEST"
+HLD

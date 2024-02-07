@@ -2,13 +2,17 @@ import mem
 import core
 ram = mem.SimpleMem()
 
-casm = '''PUSH 0xA 0
-DMPADDR 0
-test_var DD
-IN test_var "name: "
-MSG T "Hallo: "
-MSG V test_var'''
-
+#casm = '''PUSH 0xA 0
+#DMPADDR 0
+#test_var DD
+#IN test_var "name: "
+#MSG T "Hallo: "
+#MSG V test_var
+#MSG T "TEST"
+#HLD'''
+with open('code.casm','r') as f:
+    casm = f.read()
+    f.close()
 def split_string_except_inside_quotes(input_string):
     inside_quotes = False
     result_list = []

@@ -14,8 +14,8 @@ def IN(var, question, ram):
     if len(user_input)>len(var_indexes):
         user_input = user_input[:len(var_indexes)]
 
-    for letter in user_input:
-        pass
+    #for letter in user_input:
+    #    pass
     for i in range(len(var_indexes)):
         index = ram.index.index(var_indexes[i])
         try:

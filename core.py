@@ -3,8 +3,13 @@ import logic
 import mem
 import other
 import ram_var_man
+import gpu
+import time
 
+gpu = gpu.SimpleGpu()
 ram = mem.SimpleMem()
+
+gpu.boot()
 
 def execute(key, op1, op2, op3):
     opperants = key,op1,op2,op3
@@ -30,7 +35,8 @@ def execute(key, op1, op2, op3):
     elif key == 'XOR':
         logic.XOR(ram=ram, *xopperants)
     elif key == 'MSG':
-        other.MSG(ram=ram, *xopperants)
+        gpu.show_text2(text=op2,ram=ram,format=op1)
+        #other.MSG(ram=ram, *xopperants)
     elif key == 'PUSH':
         ram_var_man.PUSH(ram=ram, *xopperants)
     elif key == 'POP':
@@ -38,7 +44,8 @@ def execute(key, op1, op2, op3):
     elif key == 'MOV':
         ram_var_man.MOV(ram=ram, *xopperants)
     elif key == 'IN':
-        other.IN(ram=ram, *xopperants)
+        gpu.IN(ram=ram,question=op2,var=op1)
+        #other.IN(ram=ram, *xopperants)
     elif key == 'BS':
         logic.BS(ram=ram, *xopperants)
     elif key == 'NOT':
@@ -47,6 +54,12 @@ def execute(key, op1, op2, op3):
         ram_var_man.DMPADDR(ram=ram, *xopperants)
     elif key == 'DMPMEM':
         ram_var_man.DMP(ram=ram)
+    elif key == 'DSPPRN':
+        gpu.show_text(op1)
+    elif key == 'SLEEP':
+        time.sleep(float(op1))
+    elif key == 'HLD':
+        input()
     elif op1 in ['DB','DW','DD','DQ','DT']:
         if op2 == '':
             ram_var_man.MALLOC(size=op1,name=key,ram=ram)
