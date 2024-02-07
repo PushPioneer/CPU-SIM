@@ -4,14 +4,6 @@
 ## RAM
 ## CPU
 
-## GPU
-
-- the GPU has a line buffer with the size of bits according to the amount of pixel on the x axis
-- the GPU's frame buffer is sized according to this formula (x_pixels*y_pixels/pixel_size)
-- the GPU also includes a general purpose ram with a size of 32 bits
-- the GPU doesn't do any calculations
-  - instead the CPU does all the work
-  - the GPU is only used for drawing pixels and text
 
 # Instruction set
 <hr>
@@ -38,17 +30,6 @@
   | NOT    | bitwise not                              | < int or addr > < output addr >                                                                       |
 
 
-
-
-## gpu instructions
-  
-  | Opcode   | Description                           | Usage                                                    |
-  |----------|---------------------------------------|----------------------------------------------------------|
-  | GPUINIT  | initialises the gpu                   | SCRATCHED                                                |
-  | GPUPRN   | prints text to display                | < str in "" / mem addr / data >                          |
-  | GPUPIX   | draws a pixel on the monitor          | < position in () > < 0 for white and 1 for black pixel > |
-  | GPUCLS   | clears the monitor                    | /                                                        |
-  | GPUDMPLB | dumps the line buffer to the monitor  | < line index default is 0 >                              |
-  | GPUDMPFB | dumps the frame buffer to the monitor | /                                                        |
-  | GPUUPD   | refreshes the  monitor                | /                                                        |
+# language reference
+<hr>
 
